@@ -1,0 +1,51 @@
+using System;
+
+namespace GuessTheNumberGame
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int randomNumber = random.Next(1, 201); // Genera un numero casuale compreso tra 1 e 200
+
+            Console.WriteLine("Benvenuto a Guess the Number!");
+            Console.WriteLine("Ho pensato a un numero compreso tra 1 e 200. Prova ad indovinarlo.");
+
+            int attempts = 0;
+            bool guessed = false;
+
+            while (!guessed)
+            {
+                Console.Write("Inserisci il tuo tentativo: ");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out int guess))
+                {
+                    attempts++;
+
+                    if (guess == randomNumber)
+                    {
+                        Console.WriteLine("Complimenti! Hai indovinato il numero in " + attempts + " tentativi.");
+                        guessed = true;
+                    }
+                    else if (guess < randomNumber)
+                    {
+                        Console.WriteLine("Il numero è più grande. Prova ancora.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Il numero è più piccolo. Prova ancora.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Inserisci un numero valido.");
+                }
+            }
+
+            Console.WriteLine("Grazie per aver giocato. Premi un tasto per uscire.");
+            Console.ReadKey();
+        }
+    }
+}
